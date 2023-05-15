@@ -17,12 +17,14 @@ export const PizzaItem = (prop) => {
                 <ul>
                     {prop.types.map((type, i)=><li
                         className={activeType === i ? 'active' : ''}
-                        onClick={()=>setActiveType(i)}>{typeName[type]}</li>)}
+                        onClick={()=>setActiveType(i)}
+                        key={i}>{typeName[type]}</li>)}
                 </ul>
                 <ul>
                     {prop.sizes.map((size, i) => <li
                         className={activeSize === i ? 'active' : ''}
-                        onClick={()=>setActiveSize(i)}>{size} см</li>)}
+                        onClick={()=>setActiveSize(i)}
+                        key={i}>{size} см</li>)}
                 </ul>
             </div>
             <div className="pizza-block__bottom">
@@ -41,7 +43,7 @@ export const PizzaItem = (prop) => {
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i></i>
+                    <i>0</i>
                 </button>
             </div>
         </div>
