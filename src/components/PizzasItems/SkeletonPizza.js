@@ -1,7 +1,8 @@
-import React from "react"
-import ContentLoader from "react-content-loader"
-
-const PizzaSkeleton = (props) => (
+//React
+    import React from "react"
+    import ContentLoader from "react-content-loader"
+//Component
+export const PizzaSkeleton = (props) => (
     <ContentLoader
         speed={2}
         width={280}
@@ -19,4 +20,3 @@ const PizzaSkeleton = (props) => (
     </ContentLoader>
 )
 
-export default PizzaSkeleton

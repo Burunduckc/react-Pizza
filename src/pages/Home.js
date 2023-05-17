@@ -1,9 +1,11 @@
-import React from "react";
+//React
+    import React from "react";
+//UI
 import {Catalog} from "../components/Header/Catalog";
 import {Sort} from "../components/Header/Sort";
-import PizzaSkeleton from "../components/PizzasItems/SkeletonPizza";
+import {PizzaSkeleton} from "../components/PizzasItems/SkeletonPizza";
 import {PizzaItem} from "../components/PizzasItems/PizzaItem";
-
+//Component
 export const Home = () => {
     const [pizzas, setPizzas] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
@@ -16,10 +18,11 @@ export const Home = () => {
                 setIsLoading(false)
             }
         })
+        window.scrollTo(0,0)
     })
 
     return (
-        <>
+        <div className='container'>
             <div className="content__top">
                 <Catalog/>
                 <Sort/>
@@ -31,6 +34,6 @@ export const Home = () => {
                         : pizzas.map((obj) => <PizzaItem key={obj.id} {...obj} src={obj.imageUrl}/>)
                 }
             </div>
-        </>
+        </div>
     )
 }
