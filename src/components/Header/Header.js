@@ -1,23 +1,26 @@
 //Routing
 import {Link} from "react-router-dom";
+//UI
+import {Search} from "./Search";
 //Styles
 import '../../Styles/index.scss'
 //IMG
 import pizzaLogo from '../../assets/img/pizza-logo.svg'
-
-export const Header = () => {
+//Component
+export const Header = (prop) => {
     return (
         <div className="header">
             <div className="container">
                 <Link to='/'>
-                <div className="header__logo">
-                    <img width="38" src={pizzaLogo} alt="Pizza logo"/>
-                    <div>
-                        <h1>React Pizza</h1>
-                        <p>самая вкусная пицца в Украине</p>
+                    <div className="header__logo">
+                        <img width="38" src={pizzaLogo} alt="Pizza logo"/>
+                        <div>
+                            <h1>React Pizza</h1>
+                            <p>самая вкусная пицца в Украине</p>
+                        </div>
                     </div>
-                </div>
                 </Link>
+                <Search value={prop.value} setValue={prop.setValue}/>
                 <div className="header__cart">
                     <Link to="/cart" className="button button--cart">
                         <span>520 ₴</span>

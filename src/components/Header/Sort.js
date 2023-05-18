@@ -39,6 +39,6 @@ export const Sort = (prop) => {
                         ))}
                     </ul>
                 </div>)}
-            </div>
+        </div>
     )
 }
