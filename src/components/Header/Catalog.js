@@ -1,10 +1,6 @@
-//Hooks
-import {useState} from "react";
 //Component
-export const Catalog = () => {
-    const [active, setActive] = useState(0)
-
-    const arrayofcategoryes = [
+export const Catalog = (prop) => {
+    const arrayOfCategory = [
         'Все',
         'Мясные',
         'Вегетарианская',
@@ -12,18 +8,15 @@ export const Catalog = () => {
         'Острые',
         'Закрытые'
     ]
-    const setActiveIndex = (index) => {
-        setActive(index)
-    }
 
 
     return (
         <div className="categories">
             <ul>
-                {arrayofcategoryes.map((item, i) => <li
-                    onClick={()=> setActiveIndex(i)}
-                    className={active === i ? 'active' : ''}
-                    key={i}>{item}</li>)}
+                {arrayOfCategory.map((categoryName, i) => <li
+                    onClick={()=> prop.onClickCategory(i)}
+                    className={prop.value === i ? 'active' : ''}
+                    key={i}>{categoryName}</li>)}
             </ul>
         </div>
     )
