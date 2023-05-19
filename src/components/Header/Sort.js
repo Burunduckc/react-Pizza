@@ -3,8 +3,8 @@ import {useState} from "react";
 export const Sort = (prop) => {
     const [isVisible, setIsVisible] = useState(false)
     const arrName = [{name:'популярности', sort:'rating'},
-        {name:'цене(возрастание)', sort:'price'}
-        ,{name:'цене(убывание)', sort: '-price'}
+        {name:'цене(убывание)', sort:'price'}
+        ,{name:'цене(возрастание)', sort: '-price'}
         ,{name:'алфавиту', sort:'alphabet'}]
 
     const onClickItem = (i) => {

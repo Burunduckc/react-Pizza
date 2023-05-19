@@ -10,20 +10,22 @@ import {NotFound} from "./pages/NotFound";
 import {Cart} from "./pages/Cart";
 //Component
 
-
+export const SearchContext = React.createContext()
 function App() {
     const [inputValue, setInputValue] = React.useState('')
     console.log(inputValue, 'INPUT CHANGED')
   return (
       <div className="wrapper">
-        <Header value={inputValue} setValue = {setInputValue}/>
-        <div className="content">
-              <Routes>
-                  <Route path='/' element={<Home value={inputValue}/>}/>
-                  <Route path='/cart' element={<Cart/>}/>
-                  <Route path='*' element={<NotFound/>}/>
-              </Routes>
-          </div>
+            <SearchContext.Provider value={{inputValue, setInputValue}}>
+                <Header />
+                <div className="content">
+                    <Routes>
+                        <Route path='/' element={<Home value={inputValue}/>}/>
+                        <Route path='/cart' element={<Cart/>}/>
+                        <Route path='*' element={<NotFound/>}/>
+                    </Routes>
+                </div>
+            </SearchContext.Provider>
         </div>
   );
 }

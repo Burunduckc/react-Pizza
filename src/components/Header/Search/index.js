@@ -2,8 +2,11 @@
     import React from "react";
 //Styles
 import style from './Search.module.scss'
-export const Search = (prop) => {
-
+//Context
+import {SearchContext} from "../../../App";
+//Component
+export const Search = () => {
+    const {inputValue, setInputValue} = React.useContext(SearchContext);
 
 
     return(
@@ -13,11 +16,11 @@ export const Search = (prop) => {
                 <path d="M0 0h48v48H0z" fill="none"/>
             </svg>
             <input
-                value={prop.value}
-                onChange={(e)=>prop.setValue(e.target.value)}
+                value={inputValue}
+                onChange={(e)=>setInputValue(e.target.value)}
                 className={style.input}
                 placeholder='Поиск пиццы...'/>
-            {prop.value && <svg onClick={()=>prop.setValue('')} className={style.clearIcon} height="48" viewBox="0 0 48 48" width="48"
+            {inputValue && <svg onClick={()=>setInputValue('')} className={style.clearIcon} height="48" viewBox="0 0 48 48" width="48"
                   xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>

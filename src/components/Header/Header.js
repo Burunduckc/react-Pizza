@@ -7,7 +7,7 @@ import '../../Styles/index.scss'
 //IMG
 import pizzaLogo from '../../assets/img/pizza-logo.svg'
 //Component
-export const Header = (prop) => {
+export const Header = () => {
     return (
         <div className="header">
             <div className="container">
@@ -20,7 +20,7 @@ export const Header = (prop) => {
                         </div>
                     </div>
                 </Link>
-                <Search value={prop.value} setValue={prop.setValue}/>
+                <Search />
                 <div className="header__cart">
                     <Link to="/cart" className="button button--cart">
                         <span>520 ₴</span>
