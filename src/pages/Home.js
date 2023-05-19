@@ -6,8 +6,10 @@ import {Sort} from "../components/Header/Sort";
 import {PizzaSkeleton} from "../components/PizzasItems/SkeletonPizza";
 import {PizzaItem} from "../components/PizzasItems/PizzaItem";
 import {Pagination} from "../components/pagination";
+import {SearchContext} from "../App";
 //Component
-export const Home = (prop) => {
+export const Home = () => {
+    const {inputValue} = React.useContext(SearchContext)
     const [pizzas, setPizzas] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
     const [categoryId, setCategoryId] = React.useState(0)
@@ -21,7 +23,7 @@ export const Home = (prop) => {
 
         const sortBy = sortType.sort.replace('-', '')
         const order = sortType.sort.includes('-') ? 'asc' : 'desc'
-        const search = prop.value ? `&search=${prop.value}` : '';
+        const search = inputValue ? `&search=${inputValue}` : '';
         const limit = `limit=4&`
         fetch(`https://6461fbf8491f9402f4af5cab.mockapi.io/Pizza-items?page=${currentPage}&${limit}${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sortBy}&order=${order}${search}`)
             .then(res => res.json())
@@ -30,7 +32,7 @@ export const Home = (prop) => {
                 setIsLoading(false)
             })
         window.scrollTo(0,0)
-    }, [categoryId, sortType, prop.value, currentPage])
+    }, [categoryId, sortType, inputValue, currentPage])
 
     const pizzasItems = pizzas.map((obj) => <PizzaItem key={obj.id} {...obj} src={obj.imageUrl}/>)
     const skeletons = [...new Array(6)].map((_, index) => <PizzaSkeleton key={index}/>)
