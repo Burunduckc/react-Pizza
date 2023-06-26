@@ -1,11 +1,7 @@
 import {configureStore} from "@reduxjs/toolkit";
-import stateManagement from './Slices/stateSlice'
-import inputVal from './Slices/filterSlice'
-import allstatesSlice from "./Slices/allstatesSlice";
+import filterSlice from "./Slices/filterSlice";
 export default configureStore({
     reducer:{
-        stateManagement: stateManagement,
-        InputValue: inputVal,
-        states: allstatesSlice
+    filters: filterSlice
     }
 })
