@@ -20,13 +20,10 @@ export const Home = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const categoryId = useSelector((state)=> state.filters.categoryId);
-    const sortType = useSelector(state=>state.filters.sortType.sortProperty);
+    const sortType = useSelector(state=>state.filters.sortType.sortProperty)
     console.log(sortType)
     const currentPage = useSelector(state => state.filters.currentPage);
     console.log('redux state', categoryId);
-
-
-
 
     const {inputValue} = React.useContext(SearchContext)
     const [pizzas, setPizzas] = React.useState([])
@@ -40,7 +37,7 @@ export const Home = () => {
     }
 
     React.useEffect(() => {
-        if (window.location.search){
+        if (window.location.search.substring(1)){
             const params = qs.parse(window.location.search.substring(1))
             const sort = arrName.find(obj => obj.sortProperty === params.sortProperty)
             console.log(sort)
