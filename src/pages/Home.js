@@ -17,17 +17,24 @@ import {Pagination} from "../components/pagination";
 import {SearchContext} from "../App";
 //Component
 export const Home = () => {
+    //use
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    //StatesRef
+    const isSearch = React.useRef(false)
+    const isMounted = React.useRef(false)
+    //Selectors
     const categoryId = useSelector((state)=> state.filters.categoryId);
     const sortType = useSelector(state=>state.filters.sortType.sortProperty)
-    console.log(sortType)
     const currentPage = useSelector(state => state.filters.currentPage);
+    //Logs
+    console.log(sortType)
     console.log('redux state', categoryId);
 
     const {inputValue} = React.useContext(SearchContext)
     const [pizzas, setPizzas] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
+    //Functions
     const onClickCategory = (id) => {
         dispatch(setCategoryId(id))
     }
@@ -36,21 +43,7 @@ export const Home = () => {
     dispatch(setCurrentPage(number))
     }
 
-    React.useEffect(() => {
-        if (window.location.search.substring(1)){
-            const params = qs.parse(window.location.search.substring(1))
-            const sort = arrName.find(obj => obj.sortProperty === params.sortProperty)
-            console.log(sort)
-            dispatch(
-                setFilters({
-                    ...params,
-                    sort,
-                })
-            )
-        }
-    }, [])
-
-    React.useEffect(()=>{
+    const fetchPizzas = () => {
         setIsLoading(true)
 
         const sortBy = sortType.replace('-', '')
@@ -67,26 +60,67 @@ export const Home = () => {
             .get(
                 `https://6461fbf8491f9402f4af5cab.mockapi.io/Pizza-items?page=${currentPage}&${limit}${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sortBy}&order=${order}${search}`
             ).then(response=>{
-             setPizzas(response.data)
+            setPizzas(response.data)
             setIsLoading(false)
         })
         //↑
         //новый запрос на сервер через axios
+    }
+    //Effects
 
-        window.scrollTo(0,0)
-    }, [categoryId, sortType, inputValue, currentPage]);
-
+    /*
+    ENG: If the parameters were changed and there was a first render
+    RU: Если изменили параметры и был первый рендер
+    ↓
+    */
     React.useEffect(() => {
-        const queryString  = qs.stringify({
-            sortProperty: sortType,
-            categoryId,
-            currentPage
-        })
-        navigate(`?${queryString}`)
+        if (isMounted.current){
+            const queryString  = qs.stringify({
+                sortProperty: sortType,
+                categoryId,
+                currentPage
+            })
+            navigate(`?${queryString}`)
+        }
+        isMounted.current = true
     }, [categoryId, sortType, currentPage])
 
+    /*
+     ENG: If there was a first render, then we check the URL parameters and save in redux
+     RU: Если был первый рендер, то проверяем URL-параметры и сохраняем в redux
+     ↓
+     */
+    React.useEffect(() => {
+        if (window.location.search){
+            const params = qs.parse(window.location.search.substring(1))
+            const sort = arrName.find(obj => obj.sortProperty === params.sortProperty)
+            console.log(sort)
+            dispatch(
+                setFilters({
+                    ...params,
+                    sort,
+                })
+            );
+            isSearch.current = true
+        }
+    }, [])
+    //RU: Если был первый был первый рендер, то запрашиваем пиццы
+    //ENG: If there was a first render, then we ask for pizza
+    // ↓
+    React.useEffect(()=>{
+        window.scrollTo(0,0)
+
+        if (!isSearch.current){
+        fetchPizzas();
+        }
+        isSearch.current = false
+    }, [categoryId, sortType, inputValue, currentPage]);
+
+
+    //Pizzas
     const pizzasItems = pizzas.map((obj) => <PizzaItem key={obj.id} {...obj} src={obj.imageUrl}/>)
     const skeletons = [...new Array(6)].map((_, index) => <PizzaSkeleton key={index}/>)
+    //Render
     return (
         <div className='container'>
             <div className="content__top">
@@ -100,6 +134,7 @@ export const Home = () => {
     )
 }
 
+//Another comments
 /*
 Фильтрация для статичного массива
 .filter(obj=>{
