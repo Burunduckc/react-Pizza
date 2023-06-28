@@ -14,8 +14,6 @@ export const Sort = () => {
     const dispatch = useDispatch();
     const list = useSelector(state=>state.filters.sortType)
     const sortRef = React.useRef()
-    console.log(sortRef)
-
     const [isVisible, setIsVisible] = React.useState(false)
     const onClickItem = (obj) => {
         dispatch(setSort(obj))
