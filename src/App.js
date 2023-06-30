@@ -1,8 +1,6 @@
 //React
     import React from "react";
     import {Route, Routes} from "react-router-dom";
-//Redux
-//Redux
 //Styles
 import './Styles/index.scss';
 //UI
@@ -12,13 +10,9 @@ import {NotFound} from "./pages/NotFound";
 import {Cart} from "./pages/Cart";
 //Component
 
-export const SearchContext = React.createContext()
 function App() {
-    const [inputValue, setInputValue] = React.useState('')
   return (
       <div className="wrapper">
-
-            <SearchContext.Provider value={{inputValue, setInputValue}}>
                 <Header />
                 <div className="content">
                     <Routes>
@@ -27,7 +21,6 @@ function App() {
                         <Route path='*' element={<NotFound/>}/>
                     </Routes>
                 </div>
-            </SearchContext.Provider>
         </div>
   );
 }

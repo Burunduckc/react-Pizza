@@ -2,7 +2,7 @@
 import React from "react";
 //Redux
 import {useDispatch, useSelector} from "react-redux";
-import {addProduct} from "../../redux/Slices/cartSlice";
+import {addProduct, getCartItems} from "../../redux/Slices/cartSlice";
 //IMG
 import {PizzaImg} from "./PizzaImg";
 //Variables
@@ -10,7 +10,7 @@ const typeName = ['тонкое', "традиционное"];
 //Component
 export const PizzaItem = (prop) => {
     const dispatch = useDispatch()
-    const cartItems = useSelector(state => state.cart.items.find(obj=> obj.id === prop.id))
+    const cartItems = useSelector(getCartItems(prop.id))
     const [activeType, setActiveType] = React.useState(0);
     const [activeSize, setActiveSize] = React.useState(0);
 

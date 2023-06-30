@@ -2,6 +2,7 @@
 import {Link} from "react-router-dom";
 //Redux
 import {useSelector} from "react-redux";
+import {getCartSelect} from "../../redux/Slices/cartSlice";
 //UI
 import {Search} from "./Search";
 //Styles
@@ -10,7 +11,7 @@ import '../../Styles/index.scss'
 import pizzaLogo from '../../assets/img/pizza-logo.svg'
 //Component
 export const Header = () => {
-    const {items, totalPrice} = useSelector(state => state.cart)
+    const {items, totalPrice} = useSelector(getCartSelect)
 
     const totalCount = items.reduce((sum, item) => sum + item.count, 0)
     return (
