@@ -11,7 +11,9 @@ export const CartPizza = ({id, title, count, price, imageUrl, type, size}) => {
     }
 
     const onClickMinus = () => {
-        dispatch(minusItem(id))
+        if (count > 0){
+            dispatch(minusItem(id))
+        }
     }
     const onRemoveItem = () => {
         if (window.confirm(`Вы уверены, что хотите удалить пиццу ${title}?`)){
