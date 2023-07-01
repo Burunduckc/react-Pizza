@@ -2,7 +2,8 @@
     import React from "react"
     import ContentLoader from "react-content-loader"
 //Component
-export const PizzaSkeleton = (props) => (
+
+export const PizzaSkeleton: React.FC<any> = (props) => (
     <ContentLoader
         speed={2}
         width={280}

@@ -20,7 +20,7 @@ import {PizzaSkeleton} from "../components/PizzasItems/SkeletonPizza";
 import {PizzaItem} from "../components/PizzasItems/PizzaItem";
 import {Pagination} from "../components/pagination";
 //Component
-export const Home =  () => {
+export const Home: React.FC =  () => {
     //use
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -32,12 +32,12 @@ export const Home =  () => {
     const {currentPage, categoryId, searchValue} = useSelector(getFilterSelect);
     const {items, isLoading} = useSelector(pizzaSelect)
     //Functions
-    const onClickCategory = (id) => {
+    const onClickCategory = (id: number) => {
         dispatch(setCategoryId(id))
     }
 
-    const onChangePage = number =>{
-    dispatch(setCurrentPage(number))
+    const onChangePage = (num: number) =>{
+    dispatch(setCurrentPage(num))
     }
 
     const getPizzas = async () => {
@@ -47,6 +47,7 @@ export const Home =  () => {
         const search = searchValue ? `&search=${searchValue}` : '';
         const limit = `limit=4&`
         //Fetch pizzas via Redux
+        //@ts-ignore
         dispatch(fetchPizzas({
             sortBy,
             order,
@@ -104,7 +105,7 @@ export const Home =  () => {
 
 
     //Pizzas
-    const pizzasItems = items.map((obj) => <PizzaItem key={obj.id} {...obj} src={obj.imageUrl}/>)
+    const pizzasItems = items.map((obj: any) => <PizzaItem key={obj.id} {...obj} src={obj.imageUrl}/>)
     const skeletons = [...new Array(6)].map((_, index) => <PizzaSkeleton key={index}/>)
     //Render
     return (

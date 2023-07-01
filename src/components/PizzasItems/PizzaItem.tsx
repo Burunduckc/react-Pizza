@@ -8,7 +8,18 @@ import {PizzaImg} from "./PizzaImg";
 //Variables
 const typeName = ['тонкое', "традиционное"];
 //Component
-export const PizzaItem = (prop) => {
+
+type pizzaPropr = {
+    id: number,
+    title: string,
+    price: number,
+    src: string,
+    type: number[],
+    sizes: number[],
+    types: []
+}
+
+export const PizzaItem: React.FC<pizzaPropr> = (prop) => {
     const dispatch = useDispatch()
     const cartItems = useSelector(getCartItems(prop.id))
     const [activeType, setActiveType] = React.useState(0);

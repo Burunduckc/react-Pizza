@@ -4,7 +4,13 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getFilterListSelect, setSort} from "../../redux/Slices/filterSlice";
 //Component
-export const arrName = [
+
+
+type sortItem = {
+    name: string,
+    sortProperty: string
+}
+export const arrName: sortItem[] = [
     {name:'популярности', sortProperty:'rating'},
     {name:'цене(убывание)', sortProperty:'price'},
     {name:'цене(возрастание)', sortProperty: '-price'},
@@ -13,16 +19,16 @@ export const arrName = [
 export const Sort = () => {
     const dispatch = useDispatch();
     const list = useSelector(getFilterListSelect)
-    const sortRef = React.useRef()
+    const sortRef = React.useRef(null)
     const [isVisible, setIsVisible] = React.useState(false)
-    const onClickItem = (obj) => {
+    const onClickItem = (obj: sortItem) => {
         dispatch(setSort(obj))
         console.log(obj)
         setIsVisible(false)
     }
 
     React.useEffect(() => {
-        const clickOutside = (event) => {
+        const clickOutside = ( event: any) => {
             let path = event.path || event.composedPath()
             if (!path.includes(sortRef.current)){
                 setIsVisible(false)
@@ -57,8 +63,8 @@ export const Sort = () => {
             {isVisible && (
                 <div className="sort__popup">
                     <ul>
-                        {arrName.map((item, i) => (
-                            <li className={list.sortProperty === item.sort ? 'active' : ''}
+                        {arrName.map((item, i: number) => (
+                            <li className={list.sortProperty === item.sortProperty ? 'active' : ''}
                                 key={i}
                                 onClick={()=> onClickItem(item)}>{item.name}</li>
                         ))}

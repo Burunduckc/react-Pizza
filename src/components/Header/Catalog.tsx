@@ -1,5 +1,11 @@
 //Component
-export const Catalog = (prop) => {
+import React from "react";
+
+type Caregories = {
+    value: number,
+    onClickCategory: any
+}
+export const Catalog: React.FC<Caregories> = ({value, onClickCategory}) => {
     const arrayOfCategory = [
         'Все',
         'Мясные',
@@ -13,9 +19,9 @@ export const Catalog = (prop) => {
     return (
         <div className="categories">
             <ul>
-                {arrayOfCategory.map((categoryName, i) => <li
-                    onClick={()=> prop.onClickCategory(i)}
-                    className={prop.value === i ? 'active' : ''}
+                {arrayOfCategory.map((categoryName, i: number) => <li
+                    onClick={()=> onClickCategory(i)}
+                    className={value === i ? 'active' : ''}
                     key={i}>{categoryName}</li>)}
             </ul>
         </div>

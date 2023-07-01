@@ -3,10 +3,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {CartPizza} from "../components/PizzasItems/CartPizza";
 import {clearProduct, getCartSelect} from "../redux/Slices/cartSlice";
 import {EmptyCart} from "../components/Empty";
-export const Cart = () => {
+import React from "react";
+export const Cart: React.FC = () => {
     const dispatch = useDispatch()
     const {totalPrice, items} = useSelector(getCartSelect)
-    const totalCount = items.reduce((sum, item) => sum + item.count, 0)
+    const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0)
     const onClickClear = () => {
         if (window.confirm('Вы точно хотите очистить все товары в корзине?')){
             dispatch(clearProduct())
@@ -52,7 +53,7 @@ export const Cart = () => {
                </div>
                <div className="content__items">
                    {
-                       items.map(obj => <CartPizza key={obj.id} {...obj}/>)
+                       items.map((obj: any) => <CartPizza key={obj.id} {...obj}/>)
                    }
                </div>
                <div className="cart__bottom">
