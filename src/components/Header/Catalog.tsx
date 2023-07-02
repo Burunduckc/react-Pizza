@@ -1,19 +1,20 @@
 //Component
 import React from "react";
-
 type Caregories = {
     value: number,
-    onClickCategory: any
+    onClickCategory: (id: number) => void
 }
+
+const arrayOfCategory = [
+    'Все',
+    'Мясные',
+    'Вегетарианская',
+    'Гриль',
+    'Острые',
+    'Закрытые'
+]
 export const Catalog: React.FC<Caregories> = ({value, onClickCategory}) => {
-    const arrayOfCategory = [
-        'Все',
-        'Мясные',
-        'Вегетарианская',
-        'Гриль',
-        'Острые',
-        'Закрытые'
-    ]
+
 
 
     return (

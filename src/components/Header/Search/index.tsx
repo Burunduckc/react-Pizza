@@ -20,12 +20,12 @@ export const Search = () => {
         inputRef.current?.focus()
     }
     const update= React.useCallback(
-        debounce((value: any)=>{
+        debounce((value: string)=>{
             dispatch(setSearchValue(value))
         },250),[]
     )
 
-    const onChangeInput = (event: any) => {
+    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(event.target.value)
         update(event.target.value)
     }
