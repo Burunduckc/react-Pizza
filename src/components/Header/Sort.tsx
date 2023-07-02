@@ -14,14 +14,14 @@ export const arrName: sortItem[] = [
     {name:'популярности', sortProperty:'rating'},
     {name:'цене(убывание)', sortProperty:'price'},
     {name:'цене(возрастание)', sortProperty: '-price'},
-    {name:'алфавиту', sortProperty:'alphabet'}
+    {name:'алфавиту', sortProperty:'title'}
 ]
 export const Sort = () => {
     const dispatch = useDispatch();
     const list = useSelector(getFilterListSelect)
     const sortRef = React.useRef(null)
     const [isVisible, setIsVisible] = React.useState(false)
-    const onClickItem = (obj: sortItem) => {
+    const onClickItem = (obj: any) => {
         dispatch(setSort(obj))
         console.log(obj)
         setIsVisible(false)

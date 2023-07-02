@@ -19,11 +19,12 @@ import {arrName, Sort} from "../components/Header/Sort";
 import {PizzaSkeleton} from "../components/PizzasItems/SkeletonPizza";
 import {PizzaItem} from "../components/PizzasItems/PizzaItem";
 import {Pagination} from "../components/pagination";
+import {useAppDispatch} from "../redux/store";
 //Component
 export const Home: React.FC =  () => {
     //use
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     //StatesRef
     const isSearch = React.useRef(false)
     const isMounted = React.useRef(false)
