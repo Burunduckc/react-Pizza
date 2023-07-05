@@ -10,15 +10,22 @@ type sortItem = {
     name: string,
     sortProperty: string
 }
+
 export const arrName: sortItem[] = [
     {name:'популярности', sortProperty:'rating'},
     {name:'цене(убывание)', sortProperty:'price'},
     {name:'цене(возрастание)', sortProperty: '-price'},
     {name:'алфавиту', sortProperty:'title'}
 ]
-export const Sort = () => {
+interface SortProps {
+    value: any
+}
+type SortTypeProps = {
+    value: SortProps
+}
+
+export const Sort: React.FC<SortProps> = React.memo(({value}) => {
     const dispatch = useDispatch();
-    const list = useSelector(getFilterListSelect)
     const sortRef = React.useRef(null)
     const [isVisible, setIsVisible] = React.useState(false)
     const onClickItem = (obj: any) => {
@@ -58,13 +65,13 @@ export const Sort = () => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={()=> setIsVisible(!isVisible)}>{list.name}</span>
+                <span onClick={()=> setIsVisible(!isVisible)}>{value.name}</span>
             </div>
             {isVisible && (
                 <div className="sort__popup">
                     <ul>
                         {arrName.map((item, i: number) => (
-                            <li className={list.sortProperty === item.sortProperty ? 'active' : ''}
+                            <li className={value.sortProperty === item.sortProperty ? 'active' : ''}
                                 key={i}
                                 onClick={()=> onClickItem(item)}>{item.name}</li>
                         ))}
@@ -72,4 +79,4 @@ export const Sort = () => {
                 </div>)}
         </div>
     )
-}
+})

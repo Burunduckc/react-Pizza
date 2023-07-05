@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 import qs from 'qs'
 //Redux
 import {
+    getFilterListSelect,
     getFilterPropertySelect,
     getFilterSelect,
     setCategoryId,
@@ -32,10 +33,11 @@ export const Home: React.FC =  () => {
     const sortType = useSelector(getFilterPropertySelect)
     const {currentPage, categoryId, searchValue} = useSelector(getFilterSelect);
     const {items, isLoading} = useSelector(pizzaSelect)
+    const sort = useSelector(getFilterListSelect)
     //Functions
-    const onClickCategory = (id: number) => {
+    const onClickCategory = React.useCallback((id: number) => {
         dispatch(setCategoryId(id))
-    }
+    }, [])
 
     const onChangePage = (num: number) =>{
     dispatch(setCurrentPage(num))
@@ -113,7 +115,7 @@ export const Home: React.FC =  () => {
         <div className='container'>
             <div className="content__top">
                 <Catalog value={categoryId} onClickCategory={onClickCategory} />
-                <Sort/>
+                <Sort value = {sort}/>
             </div>
             <h2 className="content__title">Все пиццы</h2>
             {

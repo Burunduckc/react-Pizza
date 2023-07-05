@@ -13,8 +13,7 @@ const arrayOfCategory = [
     'Острые',
     'Закрытые'
 ]
-export const Catalog: React.FC<Caregories> = ({value, onClickCategory}) => {
-
+export const Catalog: React.FC<Caregories> = React.memo(({value, onClickCategory}) => {
 
 
     return (
@@ -27,4 +26,4 @@ export const Catalog: React.FC<Caregories> = ({value, onClickCategory}) => {
             </ul>
         </div>
     )
-}
+})
