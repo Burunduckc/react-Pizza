@@ -12,15 +12,12 @@ import {
     setCurrentPage,
     setFilters
 } from "../redux/Slices/filterSlice";
-    import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {fetchPizzas, pizzaSelect} from "../redux/Slices/pizzasSlice";
 //UI
-import {Catalog} from "../components/Header/Catalog";
-import {arrName, Sort} from "../components/Header/Sort";
-import {PizzaSkeleton} from "../components/PizzasItems/SkeletonPizza";
-import {PizzaItem} from "../components/PizzasItems/PizzaItem";
-import {Pagination} from "../components/pagination";
+import {arrName} from "../components/Header/Sort";
 import {useAppDispatch} from "../redux/store";
+import {Pagination, Catalog, PizzaSkeleton, PizzaItem, Sort} from '../components'
 //Component
 export const Home: React.FC =  () => {
     //use
