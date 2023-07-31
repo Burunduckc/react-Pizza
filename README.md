@@ -1,3 +1,7 @@
+### Warning
+
+If you need to install any dependency, you can do it with the --force flag
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
