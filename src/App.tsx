@@ -11,9 +11,8 @@ import FullPizza from "./pages/FullPizzas";
 import React from "react";
 //Component
 
-// @ts-ignore
 
-function App() {
+const App = () => {
   return (
       <div className="wrapper">
                 <Header />

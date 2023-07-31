@@ -12,7 +12,7 @@ import {
     setCurrentPage,
     setFilters
 } from "../redux/Slices/filterSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {fetchPizzas, pizzaSelect} from "../redux/Slices/pizzasSlice";
 //UI
 import {arrName} from "../components/Header/Sort";
@@ -34,7 +34,7 @@ export const Home: React.FC =  () => {
     //Functions
     const onClickCategory = React.useCallback((id: number) => {
         dispatch(setCategoryId(id))
-    }, [])
+    }, [dispatch])
 
     const onChangePage = (num: number) =>{
     dispatch(setCurrentPage(num))
@@ -47,7 +47,6 @@ export const Home: React.FC =  () => {
         const search = searchValue ? `&search=${searchValue}` : '';
         const limit = `limit=4&`
         //Fetch pizzas via Redux
-        //@ts-ignore
         dispatch(fetchPizzas({
             sortBy,
             order,
@@ -74,7 +73,7 @@ export const Home: React.FC =  () => {
             navigate(`?${queryString}`)
         }
         isMounted.current = true
-    }, [categoryId, sortType, currentPage])
+    }, [categoryId, sortType, currentPage, navigate])
 
     /*
      ENG: If there was a first render, then we check the URL parameters and save in redux
@@ -93,7 +92,7 @@ export const Home: React.FC =  () => {
             );
             isSearch.current = true
         }
-    }, [])
+    })
     //RU: Если был первый был первый рендер, то запрашиваем пиццы
     //ENG: If there was a first render, then we ask for pizza
     // ↓
@@ -101,6 +100,7 @@ export const Home: React.FC =  () => {
         window.scrollTo(0,0)
             getPizzas();
         isSearch.current = false
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [categoryId, sortType, searchValue, currentPage]);
 
 

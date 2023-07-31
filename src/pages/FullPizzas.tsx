@@ -27,7 +27,7 @@ const FullPizza: React.FC = () => {
         }
 
         fetchPizza();
-    }, []);
+    });
 
     if (!pizza) {
         return <>'Загрузка...'</>;
@@ -35,7 +35,7 @@ const FullPizza: React.FC = () => {
 
     return (
         <div className="container">
-            <img src={pizza.imageUrl} />
+            <img src={pizza.imageUrl} alt='pizza'/>
             <h2>{pizza.title}</h2>
             <h4>{pizza.price} ₴</h4>
         </div>

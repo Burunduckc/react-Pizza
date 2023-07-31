@@ -1,8 +1,8 @@
 //React
 import React from "react";
 //Redux
-import {useDispatch, useSelector} from "react-redux";
-import {getFilterListSelect, setSort} from "../../redux/Slices/filterSlice";
+import {useDispatch} from "react-redux";
+import {setSort} from "../../redux/Slices/filterSlice";
 //Component
 
 
@@ -19,9 +19,6 @@ export const arrName: sortItem[] = [
 ]
 interface SortProps {
     value: any
-}
-type SortTypeProps = {
-    value: SortProps
 }
 
 export const Sort: React.FC<SortProps> = React.memo(({value}) => {
